@@ -1,13 +1,26 @@
 def calculate_velocity(target, current):
-vel = [0.0, 0.0]
+    """
+    
+    Retornar uma lista com velx e w
+
+    Args:
+        current (tuple): Tupla com valores posicionais x, y e orientação do atuais do robô
+        target (tuple): Tupla com valores posicionais x, y e orientação objetiva do robô
+    
+    
+    
+    
+    
+    
+    
+    
+    """
 
 
 
 
 
+    vel = [0.0, 0.0]
 
 
-
-
-
-return vel
+    return vel
