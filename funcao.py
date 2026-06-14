@@ -19,6 +19,7 @@ def calculate_velocity(target, current):
     vel = [0.0, 0.0]
     pos_rel = [target[0] - current[0], target[1] - current[1]]
     robo_apontando_destino = False
+    distancia_local = (((target[0] - current[0]))**2 + (target[1] - current[1])**2)**(1/2)
 
     vel = [0.0, 0.0]
 
@@ -47,25 +48,19 @@ def calculate_velocity(target, current):
 
     if robo_apontando_destino:
 
-
-        distancia_x = target[0] - current[0]
-        
-        distancia_y = target[1] - current[1]
-
         if distancia_local < 0.1:
 
             vel[0] = 0.0
 
-        elif distancia_x < 0 or distancia_y < 0:
+        elif pos_rel[0] < 0 or pos_rel[1] < 0:
 
             vel[0] = -0.5
 
-        elif distancia_x > 0 or distancia_y > 0:                                                                                                                                                                                            
+        elif pos_rel[0] > 0 or pos_rel[1] > 0:                                                                                                                                                                                            
 
             vel[0] = 0.5
 
-            
-
+    
 
      
 
