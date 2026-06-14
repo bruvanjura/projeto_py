@@ -18,6 +18,7 @@ def calculate_velocity(target, current):
     # Vel (tupla): (Vx, Omega)
     vel = [0.0, 0.0]
     pos_rel = [target[0] - current[0], target[1] - current[1]]
+    robo_apontando_destino = False
 
     vel = [0.0, 0.0]
 
@@ -33,51 +34,38 @@ def calculate_velocity(target, current):
     if(current[2]>aiming_angle['max'] or  current[2]<aiming_angle['min']):
         erro = aiming_angle['real']-current[2]
         vel[1] = erro*0.1
+    else:
+        robo_apontando_destino = True
     
 
 
 
     #State 2
 
-    robo_apontando_destino = True
-
     distancia_local = (((target[0] - current[0]))**2 + (target[1] - current[1])**2)**(1/2)
     
-    if target[0] < current[0]:
 
-        distancia_x = current[0] - target[0]
-    
-    else:
+    if robo_apontando_destino:
+
 
         distancia_x = target[0] - current[0]
-    if target[0] < current[0]:
-
-        distancia_y = current[1] - target[1]
-    
-    else:
-
+        
         distancia_y = target[1] - current[1]
 
-    if distancia_local < 0.1:
+        if distancia_local < 0.1:
 
-        vel[0] = 0.0
+            vel[0] = 0.0
 
-    elif distancia_x < 0 or distancia_y < 0:
+        elif distancia_x < 0 or distancia_y < 0:
 
-        vel[0] = -0.5
+            vel[0] = -0.5
 
-    elif distancia_x > 0 or distancia_y > 0:
+        elif distancia_x > 0 or distancia_y > 0:                                                                                                                                                                                            
 
-        vel[0] = 0.5
-        
+            vel[0] = 0.5
 
+            
 
-    erro_x = (target[0] - current[0])/10
-    erro_y = (target[1] - current[1])/10
-    
-    if robo_apontando_destino and current:
-        vel[0] = 0.2
-     
 
      
 
