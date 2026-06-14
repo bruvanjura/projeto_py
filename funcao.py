@@ -33,7 +33,6 @@ def calculate_velocity(target, current):
     if(current[2]>aiming_angle['max'] or  current[2]<aiming_angle['min']):
         erro = aiming_angle['real']-current[2]
         vel[1] = erro*0.1
-        return vel
     
 
 
@@ -42,8 +41,36 @@ def calculate_velocity(target, current):
 
     robo_apontando_destino = True
 
-
     distancia_local = (((target[0] - current[0]))**2 + (target[1] - current[1])**2)**(1/2)
+    
+    if target[0] < current[0]:
+
+        distancia_x = current[0] - target[0]
+    
+    else:
+
+        distancia_x = target[0] - current[0]
+    if target[0] < current[0]:
+
+        distancia_y = current[1] - target[1]
+    
+    else:
+
+        distancia_y = target[1] - current[1]
+
+    if distancia_local < 0.1:
+
+        vel[0] = 0.0
+
+    elif distancia_x < 0 or distancia_y < 0:
+
+        vel[0] = -0.5
+
+    elif distancia_x > 0 or distancia_y > 0:
+
+        vel[0] = 0.5
+        
+
 
     erro_x = (target[0] - current[0])/10
     erro_y = (target[1] - current[1])/10
