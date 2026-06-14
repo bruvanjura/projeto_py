@@ -6,6 +6,7 @@ import funcao
 initial_pose = (1,1,0)
 target = (-5,-5,np.pi/2)
 vel = [0.0, 0.0]
+pos_rel = [target[0] - initial_pose[0], target[1] - initial_pose[1]]
 
 #desenha o movimento considerando um passo de 0.1s
 time = 0
@@ -37,8 +38,8 @@ plt.axhline(y=0, color='r', linestyle='-')
 
 
 
-while time < 600 and plt.fignum_exists(1):
-    pos_rel = [target[0] - current[0], target[1] - current[1]]
+while time < 600 and plt.fignum_exists(1) and (pos_rel[0]**2 + pos_rel[1]**2)**(1/2) > 0.1:
+   
     angle_real = math.atan2(pos_rel[1], pos_rel[0])
 
 
@@ -57,6 +58,7 @@ while time < 600 and plt.fignum_exists(1):
 
     #Atualiza
     current = (current[0]+dx, current[1]+dy, current[2]+dtheta)
+    pos_rel = [target[0] - current[0], target[1] - current[1]]
     time += 0.1
 
     #Plota
