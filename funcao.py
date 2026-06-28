@@ -57,7 +57,7 @@ def calculate_velocity(target, current):
             elif erro < -math.pi:
                 erro += 2*math.pi
 
-            if abs(target[2] - current[2]) < 0.02:
+            if abs(target[2] - current[2]) < 0.05:
                 vel[1] = 0.0
             else:
                 vel[1] = erro*0.2
