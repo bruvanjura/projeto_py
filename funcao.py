@@ -21,10 +21,7 @@ def calculate_velocity(target, current):
     robo_apontando_destino = False
     distancia_local = ((pos_rel[0])**2 + (pos_rel[1])**2)**(1/2)
 
-    vel = [0.0, 0.0]
-
-
-
+   
     # math.atan2 lida com divisão por zero e corrige o quadrante do ângulo
     angle_real = math.atan2(pos_rel[1], pos_rel[0])
     aiming_angle = {'max': angle_real + math.radians(10),
