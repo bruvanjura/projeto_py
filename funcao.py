@@ -59,6 +59,11 @@ def calculate_velocity(target, current):
             else:
                 vel[1] = erro*0.2
 
+        elif distancia_local < 0.2:
+            erro = aiming_angle['real']-current[2] # => manter o ponto no campo de visão
+            vel[1] = erro*0.2
+            vel[0] = 0.2
+
         else:
             erro = aiming_angle['real']-current[2] # => manter o ponto no campo de visão
             vel[1] = erro*0.2

@@ -4,8 +4,8 @@ import numpy as np
 
 
 import funcao 
-initial_pose = (0,0,-np.pi/4)
-target = (-1,1,3*np.pi/4)
+initial_pose = (0,0,np.pi)
+target = (2,4,np.pi/2)
 vel = [0.0, 0.0]
 pos_rel = [target[0] - initial_pose[0], target[1] - initial_pose[1]]
 
@@ -67,6 +67,23 @@ plt.grid(True)
 plt.plot(time, math.degrees(current[2]), 'b.')
 
 # ==========================================
+# FIGURA 3 - VELOCIDADES X TEMPO
+# ==========================================
+fig3, (ax_v, ax_w) = plt.subplots(2, 1, sharex=True, num=3)
+fig3.suptitle('Perfil de Velocidades')
+
+ax_v.set_ylabel('Linear v (m/s)')
+ax_v.grid(True)
+
+ax_w.set_ylabel('Angular w (rad/s)')
+ax_w.set_xlabel('Tempo (s)')
+ax_w.grid(True)
+
+# Plota os pontos iniciais (tempo = 0, velocidades iniciais)
+ax_v.plot(time, vel[0], 'r.')
+ax_w.plot(time, vel[1], 'g.')
+
+# ==========================================
 # LOOP DE TESTES
 # ==========================================
 dist = ((pos_rel[0])**2 + (pos_rel[1])**2)**(1/2)
@@ -107,6 +124,11 @@ while plt.fignum_exists(1) and (dist > 0.1 or abs(theta_warped - target[2]) > 0.
     # Atualiza Figura 2 (Gráfico de Ângulo)
     plt.figure(2)
     plt.plot([prev_time, time], [math.degrees(prev_current[2]), math.degrees(current[2])], 'b-')
+
+    
+    # Atualiza Figura 3 (Gráfico das velocidades)
+    ax_v.plot([prev_time, time], [vel[0], vel[0]], 'r-') 
+    ax_w.plot([prev_time, time], [vel[1], vel[1]], 'g-')
     
    
     
@@ -124,5 +146,8 @@ plt.savefig('Trajeto_caso3.png')
 
 plt.figure(2)
 plt.savefig('orientacao_caso3.png')
+
+plt.figure(3)
+plt.savefig('velocidades_caso3.png')
 
 plt.show()
